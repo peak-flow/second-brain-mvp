@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    // OpenAI API configuration for Task Planner service
+    'openai' => [
+        // Place your OpenAI API key in the .env file as OPENAI_API_KEY
+        'api_key' => env('OPENAI_API_KEY'),
+    ],
+
 ];
