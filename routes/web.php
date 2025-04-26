@@ -25,6 +25,7 @@ require __DIR__.'/auth.php';
 
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\TreeController;
+use App\Http\Controllers\Api\TaskController;
 
 Route::prefix('api')
     ->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class)
@@ -34,4 +35,7 @@ Route::prefix('api')
 
         Route::get('trees', [TreeController::class, 'index']);
         Route::post('trees', [TreeController::class, 'store']);
+
+        Route::get('tasks', [TaskController::class, 'index']);
+        Route::post('tasks', [TaskController::class, 'store']);
     });

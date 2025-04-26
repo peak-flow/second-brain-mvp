@@ -3,7 +3,7 @@
 ## Phase 1: Foundation
 - [x] Projects API endpoints and Feature tests
 - [x] Tree API endpoints and Feature tests
-- [ ] Tasks API endpoints and tests
+- [x] Tasks API endpoints and tests
 - [ ] Topics API endpoints and tests
 - [ ] Repository/service layer for entities (Projects, Tasks, Topics)
 - [ ] Tree manipulation: move and delete nodes
