@@ -37,13 +37,18 @@
     },
     {
       "name": "Task Planning",
-      "description": "AI-assisted breakdown of tasks into steps",
-      "components": ["TaskPlanner", "TaskPlannerService", "TaskController", "Task"]
+      "description": "AI-assisted breakdown of tasks into steps with categorization",
+      "components": ["TaskPlanner", "TaskPlannerService", "TaskController", "Task", "AIManager"]
     },
     {
-      "name": "Agent Creation",
-      "description": "Creation and management of custom AI agents with prompts",
-      "components": ["AgentCreator", "AgentPrompt"]
+      "name": "Multi-Provider AI System",
+      "description": "Flexible AI integration with support for multiple providers and agent types",
+      "components": ["AIManager", "AIProviderInterface", "OpenAIProvider", "AnthropicProvider"]
+    },
+    {
+      "name": "Agent Management",
+      "description": "Creation and configuration of custom AI agents with provider and model selection",
+      "components": ["AgentCreator", "AgentPrompt", "AgentPromptSeeder"]
     },
     {
       "name": "Topic Organization",

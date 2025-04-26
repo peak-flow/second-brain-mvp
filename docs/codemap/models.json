@@ -4,17 +4,43 @@
     "AgentPrompt": {
       "file": "app/Models/AgentPrompt.php",
       "namespace": "App\\Models",
-      "description": "Model for storing AI agent prompts",
+      "description": "Model for storing AI agent configurations",
       "table": "agent_prompts",
       "traits": ["HasFactory"],
-      "fillable": ["name", "prompt"],
-      "casts": {},
+      "fillable": ["name", "prompt", "provider", "model", "type", "parameters"],
+      "casts": {
+        "parameters": "array"
+      },
       "relationships": [],
       "validations": {
         "name": "required|string|max:100",
-        "prompt": "required|string"
+        "prompt": "required|string",
+        "provider": "required|string|max:50",
+        "model": "required|string|max:50",
+        "type": "required|string|max:50",
+        "parameters": "nullable|array"
       },
-      "migration": "database/migrations/0001_01_01_000007_create_agent_prompts_table.php"
+      "methods": [
+        {
+          "name": "getDefaultParameters",
+          "signature": "public function getDefaultParameters(): array",
+          "description": "Gets default parameters for the provider when none are specified"
+        },
+        {
+          "name": "getCombinedParameters",
+          "signature": "public function getCombinedParameters(): array",
+          "description": "Combines default and custom parameters"
+        },
+        {
+          "name": "scopeOfType",
+          "signature": "public function scopeOfType($query, string $type)",
+          "description": "Scope for filtering agents by type"
+        }
+      ],
+      "migrations": [
+        "database/migrations/0001_01_01_000007_create_agent_prompts_table.php",
+        "database/migrations/0001_01_01_000008_enhance_agent_prompts_table.php"
+      ]
     },
     "Project": {
       "file": "app/Models/Project.php",

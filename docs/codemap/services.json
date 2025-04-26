@@ -1,36 +1,151 @@
 {
   "version": 1,
   "services": {
+    "AIManager": {
+      "file": "app/Services/AI/AIManager.php",
+      "namespace": "App\\Services\\AI",
+      "description": "Service for managing AI providers and agent-based AI requests",
+      "dependencies": [
+        {"name": "AIProviderInterface", "type": "interface", "description": "Interface for AI provider implementations"},
+        {"name": "AgentPrompt", "type": "model", "description": "Model for storing agent configurations"}
+      ],
+      "methods": [
+        {
+          "name": "registerProvider",
+          "signature": "public function registerProvider(AIProviderInterface $provider): void",
+          "description": "Registers an AI provider with the manager",
+          "parameters": [
+            {"name": "provider", "type": "AIProviderInterface", "description": "Provider implementation to register"}
+          ]
+        },
+        {
+          "name": "getProvider",
+          "signature": "public function getProvider(string $providerId): ?AIProviderInterface",
+          "description": "Gets a provider instance by ID",
+          "parameters": [
+            {"name": "providerId", "type": "string", "description": "ID of the provider to retrieve"}
+          ],
+          "returns": {"type": "?AIProviderInterface", "description": "Provider instance or null if not found"}
+        },
+        {
+          "name": "getProviders",
+          "signature": "public function getProviders(): array",
+          "description": "Gets all registered provider instances",
+          "returns": {"type": "array", "description": "Array of provider instances indexed by provider ID"}
+        },
+        {
+          "name": "completeWithAgent",
+          "signature": "public function completeWithAgent(string $agentType, string $prompt, array $parameters = []): string",
+          "description": "Executes a completion request using an agent of specified type",
+          "parameters": [
+            {"name": "agentType", "type": "string", "description": "Type of agent to use (e.g., task_planner)"},
+            {"name": "prompt", "type": "string", "description": "User prompt to send to the AI"},
+            {"name": "parameters", "type": "array", "description": "Optional additional parameters"}
+          ],
+          "returns": {"type": "string", "description": "The AI response text"}
+        },
+        {
+          "name": "chatWithAgent",
+          "signature": "public function chatWithAgent(string $agentType, array $messages, array $parameters = []): string",
+          "description": "Executes a chat request using an agent of specified type",
+          "parameters": [
+            {"name": "agentType", "type": "string", "description": "Type of agent to use"},
+            {"name": "messages", "type": "array", "description": "Array of message objects with role and content"},
+            {"name": "parameters", "type": "array", "description": "Optional additional parameters"}
+          ],
+          "returns": {"type": "string", "description": "The AI response text"}
+        },
+        {
+          "name": "complete",
+          "signature": "public function complete(string $providerId, string $prompt, string $systemPrompt = '', array $parameters = []): string",
+          "description": "Sends a direct completion request to a specific provider",
+          "parameters": [
+            {"name": "providerId", "type": "string", "description": "ID of the provider to use"},
+            {"name": "prompt", "type": "string", "description": "User prompt to send"},
+            {"name": "systemPrompt", "type": "string", "description": "Optional system instructions"},
+            {"name": "parameters", "type": "array", "description": "Optional additional parameters"}
+          ],
+          "returns": {"type": "string", "description": "The AI response text"}
+        },
+        {
+          "name": "chat",
+          "signature": "public function chat(string $providerId, array $messages, array $parameters = []): string",
+          "description": "Sends a direct chat request to a specific provider",
+          "parameters": [
+            {"name": "providerId", "type": "string", "description": "ID of the provider to use"},
+            {"name": "messages", "type": "array", "description": "Array of message objects"},
+            {"name": "parameters", "type": "array", "description": "Optional additional parameters"}
+          ],
+          "returns": {"type": "string", "description": "The AI response text"}
+        }
+      ],
+      "usage": {
+        "example": "$response = app(AIManager::class)->completeWithAgent('task_planner', 'Create a plan for building a website')",
+        "notes": "Providers are registered via the AIServiceProvider"
+      },
+      "related_tests": ["tests/Unit/AIManagerTest.php"]
+    },
     "TaskPlannerService": {
       "file": "app/Services/TaskPlannerService.php",
       "namespace": "App\\Services",
       "description": "Service for AI-assisted task planning and breakdown",
       "dependencies": [
-        {"name": "OpenAI API", "type": "external", "description": "Used for generating task steps"}
+        {"name": "AIManager", "type": "service", "description": "Used for managing AI requests"}
       ],
       "methods": [
         {
-          "name": "planTask",
-          "signature": "public function planTask(string $description): array",
+          "name": "breakdown",
+          "signature": "public function breakdown(string $task, string $agentType = 'task_planner'): array",
           "description": "Takes a task description and returns a structured list of steps",
           "parameters": [
-            {"name": "description", "type": "string", "description": "Natural language description of the task"}
+            {"name": "task", "type": "string", "description": "Natural language description of the task"},
+            {"name": "agentType", "type": "string", "description": "Agent type to use for planning"}
           ],
           "returns": {"type": "array", "description": "Array of structured steps to complete the task"}
         },
         {
           "name": "parseSteps",
-          "signature": "protected function parseSteps(string $aiResponse): array",
+          "signature": "protected function parseSteps(string $text): array",
           "description": "Parses the AI-generated response into a structured format",
           "parameters": [
-            {"name": "aiResponse", "type": "string", "description": "Raw response from the AI model"}
+            {"name": "text", "type": "string", "description": "Raw response from the AI model"}
           ],
           "returns": {"type": "array", "description": "Parsed steps in standardized format"}
+        },
+        {
+          "name": "generateTaskTitle",
+          "signature": "public function generateTaskTitle(string $description, string $agentType = 'task_summarizer'): string",
+          "description": "Generates a concise title for a task description",
+          "parameters": [
+            {"name": "description", "type": "string", "description": "Full task description"},
+            {"name": "agentType", "type": "string", "description": "Agent type to use for summarization"}
+          ],
+          "returns": {"type": "string", "description": "Concise task title"}
+        },
+        {
+          "name": "categorizeTasks",
+          "signature": "public function categorizeTasks(array $tasks, string $agentType = 'task_categorizer'): array",
+          "description": "Organizes a list of tasks into logical categories",
+          "parameters": [
+            {"name": "tasks", "type": "array", "description": "Array of task descriptions"},
+            {"name": "agentType", "type": "string", "description": "Agent type to use for categorization"}
+          ],
+          "returns": {"type": "array", "description": "Associative array of categories with tasks"}
+        },
+        {
+          "name": "parseCategories",
+          "signature": "protected function parseCategories(string $text, array $originalTasks): array",
+          "description": "Parses the AI-generated category structure",
+          "parameters": [
+            {"name": "text", "type": "string", "description": "Raw response from the AI model"},
+            {"name": "originalTasks", "type": "array", "description": "Original tasks for fallback"}
+          ],
+          "returns": {"type": "array", "description": "Parsed category structure"}
         }
       ],
       "usage": {
-        "example": "$steps = app(TaskPlannerService::class)->planTask('Build a responsive navbar')",
-        "notes": "Uses OpenAI API key from services.php config"
+        "example": "$steps = app(TaskPlannerService::class)->breakdown('Build a responsive navbar')",
+        "notes": "Uses AI agents configured in the database"
       },
       "related_tests": ["tests/Unit/TaskPlannerServiceTest.php"]
     }

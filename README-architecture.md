@@ -39,6 +39,20 @@ php artisan migrate
     - `services.json`: Services documentation with method signatures and parameters
     - `api.json`: API endpoint documentation with methods, paths, and parameters
     - `index.json`: Project feature map connecting components
+
+## Multi-Provider AI System
+
+24. Enhanced AI capabilities with multi-provider support:
+    - Created `AIProviderInterface` to abstract provider-specific implementations
+    - Implemented providers for OpenAI and Anthropic (Claude)
+    - Developed `AIManager` service for provider/agent orchestration
+    - Enhanced `AgentPrompt` model with provider, model, type, and parameters fields
+
+25. Extended agent functionality:
+    - Added agent type categorization (task planning, summarization, categorization)
+    - Implemented parameter customization per agent
+    - Created database migration and seeder for default agents
+    - Added agent factory enhancements for testing
 # Architecture Notes
 
 ## Tree API Endpoints (Phase 1)

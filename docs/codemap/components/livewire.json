@@ -4,24 +4,38 @@
     "AgentCreator": {
       "file": "app/Livewire/AgentCreator.php",
       "namespace": "App\\Livewire",
-      "description": "Livewire component for creating AI agents with custom prompts",
+      "description": "Livewire component for creating AI agents with custom prompts, providers, and models",
       "properties": [
         {"name": "name", "type": "string", "default": "''", "description": "Name of the agent prompt"},
         {"name": "prompt", "type": "string", "default": "''", "description": "Text of the prompt template"},
-        {"name": "agents", "type": "array", "default": "[]", "description": "List of existing agent prompts"}
+        {"name": "provider", "type": "string", "default": "'openai'", "description": "AI provider ID (e.g., openai, anthropic)"},
+        {"name": "model", "type": "string", "default": "'gpt-3.5-turbo'", "description": "Model identifier for the selected provider"},
+        {"name": "type", "type": "string", "default": "'general'", "description": "Agent type for functional categorization"},
+        {"name": "parameters", "type": "?array", "default": "null", "description": "Custom parameters for the agent"},
+        {"name": "agents", "type": "array", "default": "[]", "description": "List of existing agent prompts"},
+        {"name": "providers", "type": "array", "default": "[]", "description": "List of available AI providers"},
+        {"name": "models", "type": "array", "default": "[]", "description": "List of available models for selected provider"},
+        {"name": "agentTypes", "type": "array", "default": "{...}", "description": "Agent type options with descriptions"}
       ],
       "rules": [
         {"name": "required|string|max:100", "description": "Validation rule for name field"},
-        {"prompt": "required|string", "description": "Validation rule for prompt field"}
+        {"prompt": "required|string", "description": "Validation rule for prompt field"},
+        {"provider": "required|string|max:50", "description": "Validation rule for provider field"},
+        {"model": "required|string|max:50", "description": "Validation rule for model field"},
+        {"type": "required|string|max:50", "description": "Validation rule for agent type field"},
+        {"parameters": "nullable|array", "description": "Validation rule for parameters field"}
       ],
       "methods": [
-        {"name": "mount", "signature": "public function mount(): void", "description": "Initializes component and loads agents"},
+        {"name": "mount", "signature": "public function mount(AIManager $aiManager): void", "description": "Initializes component with available providers and models"},
+        {"name": "updateModels", "signature": "public function updateModels(AIManager $aiManager): void", "description": "Updates available models based on selected provider"},
         {"name": "loadAgents", "signature": "public function loadAgents(): void", "description": "Loads all agent prompts from database"},
         {"name": "createAgent", "signature": "public function createAgent(): void", "description": "Validates and creates a new agent prompt"},
+        {"name": "setProviderChanged", "signature": "public function setProviderChanged(): void", "description": "Handles provider selection change event"},
+        {"name": "deleteAgent", "signature": "public function deleteAgent($id): void", "description": "Deletes an agent from the database"},
         {"name": "render", "signature": "public function render()", "description": "Renders the component view"}
       ],
       "view": "livewire.agent-creator",
-      "dependencies": ["App\\Models\\AgentPrompt"],
+      "dependencies": ["App\\Models\\AgentPrompt", "App\\Services\\AI\\AIManager"],
       "related_tests": ["tests/Feature/AgentCreatorTest.php"]
     },
     "TaskPlanner": {
