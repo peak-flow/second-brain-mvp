@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "components": {
+    "AgentCreator": {
+      "file": "app/Livewire/AgentCreator.php",
+      "namespace": "App\\Livewire",
+      "description": "Livewire component for creating AI agents with custom prompts",
+      "properties": [
+        {"name": "name", "type": "string", "default": "''", "description": "Name of the agent prompt"},
+        {"name": "prompt", "type": "string", "default": "''", "description": "Text of the prompt template"},
+        {"name": "agents", "type": "array", "default": "[]", "description": "List of existing agent prompts"}
+      ],
+      "rules": [
+        {"name": "required|string|max:100", "description": "Validation rule for name field"},
+        {"prompt": "required|string", "description": "Validation rule for prompt field"}
+      ],
+      "methods": [
+        {"name": "mount", "signature": "public function mount(): void", "description": "Initializes component and loads agents"},
+        {"name": "loadAgents", "signature": "public function loadAgents(): void", "description": "Loads all agent prompts from database"},
+        {"name": "createAgent", "signature": "public function createAgent(): void", "description": "Validates and creates a new agent prompt"},
+        {"name": "render", "signature": "public function render()", "description": "Renders the component view"}
+      ],
+      "view": "livewire.agent-creator",
+      "dependencies": ["App\\Models\\AgentPrompt"],
+      "related_tests": ["tests/Feature/AgentCreatorTest.php"]
+    },
+    "TaskPlanner": {
+      "file": "app/Livewire/TaskPlanner.php",
+      "namespace": "App\\Livewire",
+      "description": "Livewire component for AI-assisted task planning and breakdown",
+      "properties": [
+        {"name": "description", "type": "string", "default": "''", "description": "Description of the task to be planned"},
+        {"name": "steps", "type": "array", "default": "[]", "description": "Parsed steps for completing the task"},
+        {"name": "projects", "type": "array", "default": "[]", "description": "Available projects for task assignment"},
+        {"name": "selectedProject", "type": "int|null", "default": "null", "description": "Currently selected project ID"}
+      ],
+      "methods": [
+        {"name": "mount", "signature": "public function mount(): void", "description": "Initializes component and loads projects"},
+        {"name": "planTask", "signature": "public function planTask(): void", "description": "Calls AI service to plan and break down steps for a task"},
+        {"name": "saveTask", "signature": "public function saveTask(): void", "description": "Saves planned task with steps to database"},
+        {"name": "render", "signature": "public function render()", "description": "Renders the component view"}
+      ],
+      "view": "livewire.task-planner",
+      "dependencies": ["App\\Services\\TaskPlannerService", "App\\Models\\Task", "App\\Models\\Project"],
+      "related_tests": ["tests/Feature/TaskPlannerComponentTest.php"]
+    },
+    "TreeManager": {
+      "file": "app/Livewire/TreeManager.php",
+      "namespace": "App\\Livewire",
+      "description": "Livewire component for managing hierarchical content trees",
+      "properties": [
+        {"name": "trees", "type": "array", "default": "[]", "description": "Collection of tree nodes"},
+        {"name": "newTreeName", "type": "string", "default": "''", "description": "Name for new tree node being created"},
+        {"name": "selectedTreeId", "type": "int|null", "default": "null", "description": "Currently selected tree ID"},
+        {"name": "parentId", "type": "int|null", "default": "null", "description": "Parent ID for tree creation/movement"},
+        {"name": "projectId", "type": "int|null", "default": "null", "description": "Project ID for filtering trees"}
+      ],
+      "methods": [
+        {"name": "mount", "signature": "public function mount($projectId = null): void", "description": "Initializes component and loads trees"},
+        {"name": "createTree", "signature": "public function createTree(): void", "description": "Creates a new tree node"},
+        {"name": "moveTree", "signature": "public function moveTree(): void", "description": "Moves tree node to different parent"},
+        {"name": "deleteTree", "signature": "public function deleteTree(): void", "description": "Deletes a tree node"},
+        {"name": "loadTrees", "signature": "public function loadTrees(): void", "description": "Loads tree nodes from database"},
+        {"name": "render", "signature": "public function render()", "description": "Renders the component view"}
+      ],
+      "view": "livewire.tree-manager",
+      "dependencies": ["App\\Models\\Tree", "App\\Models\\Project"],
+      "related_tests": ["tests/Feature/TreeManagerTest.php"]
+    }
+  }
+}

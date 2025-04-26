@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "services": {
+    "TaskPlannerService": {
+      "file": "app/Services/TaskPlannerService.php",
+      "namespace": "App\\Services",
+      "description": "Service for AI-assisted task planning and breakdown",
+      "dependencies": [
+        {"name": "OpenAI API", "type": "external", "description": "Used for generating task steps"}
+      ],
+      "methods": [
+        {
+          "name": "planTask",
+          "signature": "public function planTask(string $description): array",
+          "description": "Takes a task description and returns a structured list of steps",
+          "parameters": [
+            {"name": "description", "type": "string", "description": "Natural language description of the task"}
+          ],
+          "returns": {"type": "array", "description": "Array of structured steps to complete the task"}
+        },
+        {
+          "name": "parseSteps",
+          "signature": "protected function parseSteps(string $aiResponse): array",
+          "description": "Parses the AI-generated response into a structured format",
+          "parameters": [
+            {"name": "aiResponse", "type": "string", "description": "Raw response from the AI model"}
+          ],
+          "returns": {"type": "array", "description": "Parsed steps in standardized format"}
+        }
+      ],
+      "usage": {
+        "example": "$steps = app(TaskPlannerService::class)->planTask('Build a responsive navbar')",
+        "notes": "Uses OpenAI API key from services.php config"
+      },
+      "related_tests": ["tests/Unit/TaskPlannerServiceTest.php"]
+    }
+  }
+}

@@ -1,0 +1,268 @@
+{
+  "version": 1,
+  "controllers": {
+    "ProjectController": {
+      "file": "app/Http/Controllers/Api/ProjectController.php",
+      "namespace": "App\\Http\\Controllers\\Api",
+      "description": "API controller for project management",
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/projects",
+          "name": "index",
+          "description": "List all projects for authenticated user",
+          "parameters": [],
+          "returns": "Collection of Project resources"
+        },
+        {
+          "method": "POST",
+          "path": "/api/projects",
+          "name": "store",
+          "description": "Create a new project",
+          "parameters": [
+            {"name": "name", "type": "string", "required": true, "description": "Project name"},
+            {"name": "description", "type": "string", "required": false, "description": "Project description"}
+          ],
+          "returns": "New Project resource"
+        },
+        {
+          "method": "GET",
+          "path": "/api/projects/{id}",
+          "name": "show",
+          "description": "Get a specific project",
+          "parameters": [
+            {"name": "id", "type": "integer", "required": true, "description": "Project ID"}
+          ],
+          "returns": "Project resource"
+        },
+        {
+          "method": "PUT",
+          "path": "/api/projects/{id}",
+          "name": "update",
+          "description": "Update a project",
+          "parameters": [
+            {"name": "id", "type": "integer", "required": true, "description": "Project ID"},
+            {"name": "name", "type": "string", "required": false, "description": "Project name"},
+            {"name": "description", "type": "string", "required": false, "description": "Project description"}
+          ],
+          "returns": "Updated Project resource"
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/projects/{id}",
+          "name": "destroy",
+          "description": "Delete a project",
+          "parameters": [
+            {"name": "id", "type": "integer", "required": true, "description": "Project ID"}
+          ],
+          "returns": "204 No Content"
+        }
+      ],
+      "dependencies": ["App\\Models\\Project"],
+      "related_tests": ["tests/Feature/ProjectApiTest.php"]
+    },
+    "TaskController": {
+      "file": "app/Http/Controllers/Api/TaskController.php",
+      "namespace": "App\\Http\\Controllers\\Api",
+      "description": "API controller for task management",
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/tasks",
+          "name": "index",
+          "description": "List all tasks, optionally filtered by project",
+          "parameters": [
+            {"name": "project_id", "type": "integer", "required": false, "description": "Filter by project"}
+          ],
+          "returns": "Collection of Task resources"
+        },
+        {
+          "method": "POST",
+          "path": "/api/tasks",
+          "name": "store",
+          "description": "Create a new task",
+          "parameters": [
+            {"name": "title", "type": "string", "required": true, "description": "Task title"},
+            {"name": "description", "type": "string", "required": true, "description": "Task description"},
+            {"name": "steps", "type": "array", "required": false, "description": "Task steps"},
+            {"name": "status", "type": "string", "required": true, "description": "Task status (pending, in_progress, completed)"},
+            {"name": "project_id", "type": "integer", "required": true, "description": "Project ID"}
+          ],
+          "returns": "New Task resource"
+        },
+        {
+          "method": "GET",
+          "path": "/api/tasks/{id}",
+          "name": "show",
+          "description": "Get a specific task",
+          "parameters": [
+            {"name": "id", "type": "integer", "required": true, "description": "Task ID"}
+          ],
+          "returns": "Task resource"
+        },
+        {
+          "method": "PUT",
+          "path": "/api/tasks/{id}",
+          "name": "update",
+          "description": "Update a task",
+          "parameters": [
+            {"name": "id", "type": "integer", "required": true, "description": "Task ID"},
+            {"name": "title", "type": "string", "required": false, "description": "Task title"},
+            {"name": "description", "type": "string", "required": false, "description": "Task description"},
+            {"name": "steps", "type": "array", "required": false, "description": "Task steps"},
+            {"name": "status", "type": "string", "required": false, "description": "Task status"}
+          ],
+          "returns": "Updated Task resource"
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/tasks/{id}",
+          "name": "destroy",
+          "description": "Delete a task",
+          "parameters": [
+            {"name": "id", "type": "integer", "required": true, "description": "Task ID"}
+          ],
+          "returns": "204 No Content"
+        }
+      ],
+      "dependencies": ["App\\Models\\Task"],
+      "related_tests": ["tests/Feature/TaskApiTest.php"]
+    },
+    "TopicController": {
+      "file": "app/Http/Controllers/Api/TopicController.php",
+      "namespace": "App\\Http\\Controllers\\Api",
+      "description": "API controller for topic management",
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/topics",
+          "name": "index",
+          "description": "List all topics",
+          "parameters": [],
+          "returns": "Collection of Topic resources"
+        },
+        {
+          "method": "POST",
+          "path": "/api/topics",
+          "name": "store",
+          "description": "Create a new topic",
+          "parameters": [
+            {"name": "name", "type": "string", "required": true, "description": "Topic name"},
+            {"name": "description", "type": "string", "required": false, "description": "Topic description"}
+          ],
+          "returns": "New Topic resource"
+        },
+        {
+          "method": "GET",
+          "path": "/api/topics/{id}",
+          "name": "show",
+          "description": "Get a specific topic",
+          "parameters": [
+            {"name": "id", "type": "integer", "required": true, "description": "Topic ID"}
+          ],
+          "returns": "Topic resource"
+        },
+        {
+          "method": "PUT",
+          "path": "/api/topics/{id}",
+          "name": "update",
+          "description": "Update a topic",
+          "parameters": [
+            {"name": "id", "type": "integer", "required": true, "description": "Topic ID"},
+            {"name": "name", "type": "string", "required": false, "description": "Topic name"},
+            {"name": "description", "type": "string", "required": false, "description": "Topic description"}
+          ],
+          "returns": "Updated Topic resource"
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/topics/{id}",
+          "name": "destroy",
+          "description": "Delete a topic",
+          "parameters": [
+            {"name": "id", "type": "integer", "required": true, "description": "Topic ID"}
+          ],
+          "returns": "204 No Content"
+        }
+      ],
+      "dependencies": ["App\\Models\\Topic"],
+      "related_tests": ["tests/Feature/TopicApiTest.php"]
+    },
+    "TreeController": {
+      "file": "app/Http/Controllers/Api/TreeController.php",
+      "namespace": "App\\Http\\Controllers\\Api",
+      "description": "API controller for tree management",
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/api/trees",
+          "name": "index",
+          "description": "List all trees, optionally filtered by project or parent",
+          "parameters": [
+            {"name": "project_id", "type": "integer", "required": false, "description": "Filter by project"},
+            {"name": "parent_id", "type": "integer", "required": false, "description": "Filter by parent tree"}
+          ],
+          "returns": "Collection of Tree resources"
+        },
+        {
+          "method": "POST",
+          "path": "/api/trees",
+          "name": "store",
+          "description": "Create a new tree",
+          "parameters": [
+            {"name": "name", "type": "string", "required": true, "description": "Tree name"},
+            {"name": "parent_id", "type": "integer", "required": false, "description": "Parent tree ID"},
+            {"name": "project_id", "type": "integer", "required": true, "description": "Project ID"},
+            {"name": "topic_id", "type": "integer", "required": false, "description": "Topic ID"}
+          ],
+          "returns": "New Tree resource"
+        },
+        {
+          "method": "GET",
+          "path": "/api/trees/{id}",
+          "name": "show",
+          "description": "Get a specific tree",
+          "parameters": [
+            {"name": "id", "type": "integer", "required": true, "description": "Tree ID"}
+          ],
+          "returns": "Tree resource with children"
+        },
+        {
+          "method": "PUT",
+          "path": "/api/trees/{id}",
+          "name": "update",
+          "description": "Update a tree",
+          "parameters": [
+            {"name": "id", "type": "integer", "required": true, "description": "Tree ID"},
+            {"name": "name", "type": "string", "required": false, "description": "Tree name"},
+            {"name": "topic_id", "type": "integer", "required": false, "description": "Topic ID"}
+          ],
+          "returns": "Updated Tree resource"
+        },
+        {
+          "method": "POST",
+          "path": "/api/trees/{id}/move",
+          "name": "move",
+          "description": "Move a tree to a different parent",
+          "parameters": [
+            {"name": "id", "type": "integer", "required": true, "description": "Tree ID"},
+            {"name": "parent_id", "type": "integer", "required": false, "description": "New parent tree ID (null for root)"}
+          ],
+          "returns": "Updated Tree resource"
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/trees/{id}",
+          "name": "destroy",
+          "description": "Delete a tree and its children",
+          "parameters": [
+            {"name": "id", "type": "integer", "required": true, "description": "Tree ID"}
+          ],
+          "returns": "204 No Content"
+        }
+      ],
+      "dependencies": ["App\\Models\\Tree"],
+      "related_tests": ["tests/Feature/TreeApiTest.php"]
+    }
+  }
+}

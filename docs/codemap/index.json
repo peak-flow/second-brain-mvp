@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "name": "Second Brain MVP",
+  "description": "A Laravel application for hierarchical organization of content with AI-assisted task planning",
+  "structure": {
+    "path": "structure.md",
+    "description": "High-level overview of the application architecture"
+  },
+  "components": {
+    "models": {
+      "path": "models.json",
+      "description": "Core data models and relationships"
+    },
+    "livewire": {
+      "path": "components/livewire.json",
+      "description": "Livewire UI components"
+    },
+    "services": {
+      "path": "services.json",
+      "description": "Application services"
+    },
+    "api": {
+      "path": "api.json",
+      "description": "API controllers and endpoints"
+    }
+  },
+  "features": [
+    {
+      "name": "Project Management",
+      "description": "Organization of content into projects",
+      "components": ["ProjectController", "Project"]
+    },
+    {
+      "name": "Hierarchical Tree Management",
+      "description": "Manage hierarchical content trees with parent-child relationships",
+      "components": ["TreeManager", "TreeController", "Tree"]
+    },
+    {
+      "name": "Task Planning",
+      "description": "AI-assisted breakdown of tasks into steps",
+      "components": ["TaskPlanner", "TaskPlannerService", "TaskController", "Task"]
+    },
+    {
+      "name": "Agent Creation",
+      "description": "Creation and management of custom AI agents with prompts",
+      "components": ["AgentCreator", "AgentPrompt"]
+    },
+    {
+      "name": "Topic Organization",
+      "description": "Categorization of content by subject areas",
+      "components": ["TopicController", "Topic"]
+    }
+  ]
+}

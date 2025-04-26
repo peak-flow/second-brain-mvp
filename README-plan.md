@@ -258,6 +258,35 @@ Implement graph data endpoints for visualizing connections
 Create recommendation engine using vector similarity
 Build knowledge gap analysis tools
 
+Phase 5: AI-Assisted Workflow Components (Weeks 13-14)
+User Stories for Phase 5:
+
+AI Task Planning
+
+"As a user, I want to input a freeform task description and have the application break it down into atomic steps automatically."
+"As a user, I want to see the AI-generated task steps inline and be able to copy or integrate them into my workflow."
+
+AI Agent Management
+
+"As a developer, I want to define and store custom AI prompt templates (agents) for various use cases."
+"As a user, I want to select an agent to perform specialized tasks, such as database queries, content summarization, or code generation."
+
+Development Tasks for Phase 5:
+
+Livewire Task Planner Component
+
+• Implement `TaskPlanner` Livewire component for user-entered tasks
+• Integrate with OpenAI API (via TaskPlannerService) for step breakdown
+• Build UI to display and refresh AI-generated task steps
+• Write Feature + Unit tests for TaskPlanner logic
+
+Livewire Agent Creator Component
+
+• Create `AgentCreator` Livewire component to CRUD agent prompts
+• Store prompts in `agent_prompts` table with name & template
+• Build UI to list, add, and select agents
+• Write Feature + Unit tests for AgentCreator and service gating
+
 
 
 Testing Strategy

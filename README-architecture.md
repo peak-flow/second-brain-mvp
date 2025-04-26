@@ -1,4 +1,3 @@
-$
 ## Livewire Tree Manager Component
 
 17. Created `TreeManager` Livewire component (app/Livewire/TreeManager.php):
@@ -25,6 +24,21 @@ $
 
 22. Tests for Livewire AgentCreator (`tests/Feature/AgentCreatorTest.php`):
     - Assert rendering and prompt creation with DB assertion.
+
+**Important:** After adding the `agent_prompts` table (via migration), run:
+```bash
+php artisan migrate
+```
+
+## Project Documentation
+
+23. Created structured code documentation in `docs/codemap/`:
+    - `structure.md`: High-level architectural overview
+    - `models.json`: Detailed model documentation including relationships and validations
+    - `components/livewire.json`: Livewire component documentation
+    - `services.json`: Services documentation with method signatures and parameters
+    - `api.json`: API endpoint documentation with methods, paths, and parameters
+    - `index.json`: Project feature map connecting components
 # Architecture Notes
 
 ## Tree API Endpoints (Phase 1)

@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "models": {
+    "AgentPrompt": {
+      "file": "app/Models/AgentPrompt.php",
+      "namespace": "App\\Models",
+      "description": "Model for storing AI agent prompts",
+      "table": "agent_prompts",
+      "traits": ["HasFactory"],
+      "fillable": ["name", "prompt"],
+      "casts": {},
+      "relationships": [],
+      "validations": {
+        "name": "required|string|max:100",
+        "prompt": "required|string"
+      },
+      "migration": "database/migrations/0001_01_01_000007_create_agent_prompts_table.php"
+    },
+    "Project": {
+      "file": "app/Models/Project.php",
+      "namespace": "App\\Models",
+      "description": "Model for organizing related trees and tasks",
+      "table": "projects",
+      "traits": ["HasFactory"],
+      "fillable": ["name", "description", "user_id"],
+      "casts": {},
+      "relationships": [
+        {"type": "belongsTo", "related": "User", "field": "user_id"},
+        {"type": "hasMany", "related": "Tree", "field": "project_id"},
+        {"type": "hasMany", "related": "Task", "field": "project_id"}
+      ],
+      "validations": {
+        "name": "required|string|max:255",
+        "description": "nullable|string",
+        "user_id": "required|exists:users,id"
+      },
+      "migration": "database/migrations/0001_01_01_000003_create_projects_table.php"
+    },
+    "Task": {
+      "file": "app/Models/Task.php",
+      "namespace": "App\\Models",
+      "description": "Model for actionable items with steps",
+      "table": "tasks",
+      "traits": ["HasFactory"],
+      "fillable": ["title", "description", "steps", "status", "project_id"],
+      "casts": {
+        "steps": "array"
+      },
+      "relationships": [
+        {"type": "belongsTo", "related": "Project", "field": "project_id"}
+      ],
+      "validations": {
+        "title": "required|string|max:255",
+        "description": "required|string",
+        "steps": "nullable|array",
+        "status": "required|string|in:pending,in_progress,completed",
+        "project_id": "required|exists:projects,id"
+      },
+      "migration": "database/migrations/0001_01_01_000005_create_tasks_table.php"
+    },
+    "Topic": {
+      "file": "app/Models/Topic.php",
+      "namespace": "App\\Models",
+      "description": "Model for organizing content by subject areas",
+      "table": "topics",
+      "traits": ["HasFactory"],
+      "fillable": ["name", "description"],
+      "casts": {},
+      "relationships": [
+        {"type": "hasMany", "related": "Tree", "field": "topic_id"}
+      ],
+      "validations": {
+        "name": "required|string|max:255",
+        "description": "nullable|string"
+      },
+      "migration": "database/migrations/0001_01_01_000006_create_topics_table.php"
+    },
+    "Tree": {
+      "file": "app/Models/Tree.php",
+      "namespace": "App\\Models",
+      "description": "Model for hierarchical organization of content",
+      "table": "trees",
+      "traits": ["HasFactory"],
+      "fillable": ["name", "parent_id", "project_id", "topic_id"],
+      "casts": {},
+      "relationships": [
+        {"type": "belongsTo", "related": "Tree", "field": "parent_id", "as": "parent"},
+        {"type": "hasMany", "related": "Tree", "field": "parent_id", "as": "children"},
+        {"type": "belongsTo", "related": "Project", "field": "project_id"},
+        {"type": "belongsTo", "related": "Topic", "field": "topic_id"}
+      ],
+      "validations": {
+        "name": "required|string|max:255",
+        "parent_id": "nullable|exists:trees,id",
+        "project_id": "required|exists:projects,id",
+        "topic_id": "nullable|exists:topics,id"
+      },
+      "migration": "database/migrations/0001_01_01_000004_create_trees_table.php"
+    },
+    "User": {
+      "file": "app/Models/User.php",
+      "namespace": "App\\Models",
+      "description": "Model for authenticated users",
+      "table": "users",
+      "traits": ["HasApiTokens", "HasFactory", "Notifiable"],
+      "fillable": ["name", "email", "password"],
+      "casts": {
+        "email_verified_at": "datetime",
+        "password": "hashed"
+      },
+      "relationships": [
+        {"type": "hasMany", "related": "Project", "field": "user_id"}
+      ],
+      "validations": {
+        "name": "required|string|max:255",
+        "email": "required|string|email|max:255|unique:users",
+        "password": "required|string|min:8"
+      },
+      "migration": "database/migrations/0001_01_01_000000_create_users_table.php"
+    }
+  }
+}

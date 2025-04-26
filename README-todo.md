@@ -7,9 +7,9 @@
 - [x] Topics API endpoints and tests
 - [x] Tree manipulation: move and delete nodes
 - [x] Endpoint to fetch subtree or depth-limited view
--- [ ] Livewire TreeManager UI for node management
--- [ ] Livewire TaskPlanner UI
--- [ ] Livewire AgentCreator UI
+- [x] Livewire TreeManager UI for node management
+- [x] Livewire TaskPlanner UI
+- [x] Livewire AgentCreator UI
 
 ## Phase 2: Vector Search & Relationships
 - [ ] Enable `vector` extension in PostgreSQL
@@ -30,3 +30,7 @@
 - [ ] Generate OpenAPI documentation
 - [ ] Develop PHP SDK and webhooks
 - [ ] Recommendation engine and graph visualization
+
+## Phase 5: AI-Assisted Workflow Components
+- [x] Livewire TaskPlanner UI
+- [x] Livewire AgentCreator UI
