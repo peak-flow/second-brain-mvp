@@ -29,4 +29,5 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('logout', App\Livewire\Actions\Logout::class)
-    ->name('logout');
+    ->name('logout')
+    ->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class);
