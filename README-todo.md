@@ -10,6 +10,12 @@
 - [x] Livewire TreeManager UI for node management
 - [x] Livewire TaskPlanner UI
 - [x] Livewire AgentCreator UI
+- [x] Create structured code documentation (docs/codemap)
+
+## Missing Tests for Existing Components
+- [ ] Create LogoutTest.php for Livewire/Actions/Logout.php
+- [ ] Create AppearanceTest.php for Livewire/Settings/Appearance.php
+- [ ] Create DeleteUserFormTest.php for Livewire/Settings/DeleteUserForm.php
 
 ## Phase 2: Vector Search & Relationships
 - [ ] Enable `vector` extension in PostgreSQL
