@@ -24,8 +24,15 @@ it('can create a root node', function () {
 });
 
 it('can delete a node', function () {
-    // Create a node directly
-    $tree = Tree::create([ 'name' => 'ToDelete', 'parent_id' => null, 'depth' => 0, 'path' => '' ]);
+    // Create a node directly with required fields
+    $tree = Tree::create([
+        'name' => 'ToDelete',
+        'parent_id' => null,
+        'depth' => 0,
+        'path' => '',
+        'item_type' => 'tree',
+        'item_id' => 0,
+    ]);
     $tree->path = (string) $tree->id;
     $tree->save();
 

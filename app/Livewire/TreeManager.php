@@ -34,6 +34,9 @@ class TreeManager extends Component
             $data['depth'] = 0;
         }
 
+        // Set default polymorphic fields for generic nodes
+        $data['item_type'] = 'tree';
+        $data['item_id'] = 0;
         $data['path'] = '';
         $node = Tree::create($data);
 

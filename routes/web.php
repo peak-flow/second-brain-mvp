@@ -32,6 +32,13 @@ use App\Livewire\TreeManager;
 // Livewire Tree Manager UI
 Route::middleware('auth')->get('tree-manager', TreeManager::class)
     ->name('tree.manager');
+// Livewire Task Planner UI
+Route::middleware('auth')->get('task-planner', App\Livewire\TaskPlanner::class)
+    ->name('task.planner');
+
+// Livewire Agent Creator UI
+Route::middleware('auth')->get('agent-creator', App\Livewire\AgentCreator::class)
+    ->name('agent.creator');
 // API routes
 Route::prefix('api')
     ->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class)
@@ -43,6 +50,7 @@ Route::prefix('api')
         Route::post('trees', [TreeController::class, 'store']);
         Route::put('trees/{id}/move', [TreeController::class, 'move']);
         Route::delete('trees/{id}', [TreeController::class, 'destroy']);
+        Route::get('trees/{id}/subtree', [TreeController::class, 'subtree']);
 
         Route::get('tasks', [TaskController::class, 'index']);
         Route::post('tasks', [TaskController::class, 'store']);

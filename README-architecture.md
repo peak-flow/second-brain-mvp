@@ -9,9 +9,22 @@ $
 18. Blade view (`resources/views/livewire/tree-manager.blade.php`):
     - Form to add nodes, dropdown to select parent, buttons to delete/move nodes.
 
-19. Tests for Livewire component (`tests/Feature/TreeManagerTest.php`):
+19. Tests for Livewire TreeManager (`tests/Feature/TreeManagerTest.php`):
     - Assert initial empty state
     - Create and delete operations update both UI and database.
+
+## Livewire Agent Creator Component
+
+20. Created `AgentCreator` Livewire component (app/Livewire/AgentCreator.php):
+    - Public properties: `$name`, `$prompt`, `$agents`
+    - Methods: `createAgent()` and `loadAgents()` storing prompts to DB and refreshing list.
+
+21. Blade view (`resources/views/livewire/agent-creator.blade.php`):
+    - Form to input `name` & `prompt`, button to create agent.
+    - List of saved agent prompts with truncated preview.
+
+22. Tests for Livewire AgentCreator (`tests/Feature/AgentCreatorTest.php`):
+    - Assert rendering and prompt creation with DB assertion.
 # Architecture Notes
 
 ## Tree API Endpoints (Phase 1)

@@ -5,10 +5,11 @@
 - [x] Tree API endpoints and Feature tests
 - [x] Tasks API endpoints and tests
 - [x] Topics API endpoints and tests
-- [ ] Repository/service layer for entities (Projects, Tasks, Topics)
 - [x] Tree manipulation: move and delete nodes
-- [ ] Livewire TreeManager UI for node management
-- [ ] Endpoint to fetch subtree or depth-limited view
+- [x] Endpoint to fetch subtree or depth-limited view
+-- [ ] Livewire TreeManager UI for node management
+-- [ ] Livewire TaskPlanner UI
+-- [ ] Livewire AgentCreator UI
 
 ## Phase 2: Vector Search & Relationships
 - [ ] Enable `vector` extension in PostgreSQL
