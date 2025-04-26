@@ -27,7 +27,12 @@ use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\TreeController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\TopicController;
+use App\Livewire\TreeManager;
 
+// Livewire Tree Manager UI
+Route::middleware('auth')->get('tree-manager', TreeManager::class)
+    ->name('tree.manager');
+// API routes
 Route::prefix('api')
     ->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class)
     ->group(function () {
@@ -36,6 +41,8 @@ Route::prefix('api')
 
         Route::get('trees', [TreeController::class, 'index']);
         Route::post('trees', [TreeController::class, 'store']);
+        Route::put('trees/{id}/move', [TreeController::class, 'move']);
+        Route::delete('trees/{id}', [TreeController::class, 'destroy']);
 
         Route::get('tasks', [TaskController::class, 'index']);
         Route::post('tasks', [TaskController::class, 'store']);

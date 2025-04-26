@@ -6,7 +6,8 @@
 - [x] Tasks API endpoints and tests
 - [x] Topics API endpoints and tests
 - [ ] Repository/service layer for entities (Projects, Tasks, Topics)
-- [ ] Tree manipulation: move and delete nodes
+- [x] Tree manipulation: move and delete nodes
+- [ ] Livewire TreeManager UI for node management
 - [ ] Endpoint to fetch subtree or depth-limited view
 
 ## Phase 2: Vector Search & Relationships
