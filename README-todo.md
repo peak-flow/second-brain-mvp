@@ -4,7 +4,7 @@
 - [x] Projects API endpoints and Feature tests
 - [x] Tree API endpoints and Feature tests
 - [x] Tasks API endpoints and tests
-- [ ] Topics API endpoints and tests
+- [x] Topics API endpoints and tests
 - [ ] Repository/service layer for entities (Projects, Tasks, Topics)
 - [ ] Tree manipulation: move and delete nodes
 - [ ] Endpoint to fetch subtree or depth-limited view

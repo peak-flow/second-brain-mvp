@@ -40,3 +40,20 @@
    - POST `/api/tasks`
 
 11. Run `vendor/bin/pest` to confirm Task API tests are passing.
+
+## Topic API Endpoints (Phase 1)
+
+12. Created `topics` table migration (`create_topics_table`):
+    - Fields: id, title, content, timestamps
+
+13. Added `Topic` Eloquent model with `$fillable`, plus `TopicFactory`.
+
+14. Implemented `TopicController` (API):
+    - `index()`: returns all topics
+    - `store()`: validates `title`, `content`; returns HTTP 201
+
+15. Registered routes in `routes/web.php`:
+    - GET `/api/topics`
+    - POST `/api/topics`
+
+16. Run `vendor/bin/pest` to confirm Topic API tests are passing.
