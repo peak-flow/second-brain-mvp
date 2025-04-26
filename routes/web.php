@@ -22,3 +22,16 @@ Route::middleware(['auth'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\TreeController;
+
+Route::prefix('api')
+    ->withoutMiddleware(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class)
+    ->group(function () {
+        Route::get('projects', [ProjectController::class, 'index']);
+        Route::post('projects', [ProjectController::class, 'store']);
+
+        Route::get('trees', [TreeController::class, 'index']);
+        Route::post('trees', [TreeController::class, 'store']);
+    });
